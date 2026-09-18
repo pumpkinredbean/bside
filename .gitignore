@@ -1,0 +1,11 @@
+node_modules/
+.DS_Store
+
+# bench generated artifacts — reproducible via bench/run.mjs
+bench/frames/
+bench/video/
+bench/results.json
+bench/player.html
+
+# local launch research, not project docs
+marketing/

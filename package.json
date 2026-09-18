@@ -1,0 +1,42 @@
+{
+  "name": "bside",
+  "version": "0.1.0",
+  "description": "b(oost)side — Jev-driven browser pilot on top of Aside. Typed decisions, no chat LLM in the loop.",
+  "type": "module",
+  "bin": {
+    "bside": "./src/cli.js"
+  },
+  "exports": {
+    ".": "./src/pilot.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pumpkinredbean/bside.git"
+  },
+  "scripts": {
+    "bench": "node bench/run.mjs",
+    "player": "node bench/gen-player.mjs",
+    "record": "node bench/record.mjs"
+  },
+  "license": "MIT",
+  "keywords": [
+    "typesafe",
+    "jev",
+    "system-one",
+    "aside",
+    "browser-automation",
+    "mcp"
+  ],
+  "files": [
+    "src",
+    "SKILL.md",
+    "README.md",
+    "LICENSE"
+  ],
+  "devDependencies": {
+    "playwright-core": "^1.63.0"
+  }
+}
