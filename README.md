@@ -90,14 +90,20 @@ Exposes one tool: `browse(goal, urls?, inputs?, mode?, targetId?, maxTicks?)`.
 
 ## Bonus: ChatJev
 
-Generation is also just decisions — `chat/chatjev.mjs` makes Jev "talk" by
-choosing every word from a bounded vocabulary (~500 words), sampled from its
-own probability distribution. ~1s per word, gloriously bad grammar, and a
-decent way to feel what a decision model actually is:
+Generation is also just decisions — `chat/` makes Jev "talk" without any
+text generation. Two modes:
+
+- **naive** (`chatjev.mjs`): every word is one `choice` over a ~500-word
+  vocabulary, sampled from Jev's probability distribution. ~1s/word.
+- **structured** (`--struct`, or `chat/web.mjs` for a browser UI): the same
+  observe→decide→verify loop as the browser pilot applied to syntax —
+  **plan** a sentence skeleton → **fill** each slot inside its vocab group →
+  **verify** grammaticality with a noul judge → **repair** the broken slot.
+  Produces real sentences at ~1/4 the token cost:
 
 ```bash
-node chat/chatjev.mjs "why are you fast?"
-# chatjev> i am fast → I am fast   (3 words · 3.5s · $0.0002)
+node chat/chatjev.mjs "what do you think about browser agents?" --struct
+# plan → it + aux + adj → it is good . → verify ✓ 0.94 → It is good.
 ```
 
 MIT.
