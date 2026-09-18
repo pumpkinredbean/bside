@@ -60,7 +60,7 @@ async function send() {
     const ev = JSON.parse(e.data);
     const cur = bot.querySelector(".cur");
     if (ev.e === "plan") {
-      stage("plan → \"" + esc(ev.name) + "\" sentence");
+      stage("plan → '" + esc(ev.name) + "' sentence");
     } else if (ev.e === "slot") {
       cur.insertAdjacentHTML("beforebegin", '<span class="grp">[' + ev.g + "] </span>");
     } else if (ev.e === "word") {
