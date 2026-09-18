@@ -8,6 +8,8 @@ export const SKELETONS = {
   "S + V + O": [{ g: "pronoun", h: "subject" }, { g: "verb", h: "main verb" }, { g: "noun", h: "object" }],
   "S + V + prep + O": [{ g: "pronoun", h: "subject" }, { g: "verb", h: "main verb" }, { g: "function", h: "preposition" }, { g: "noun", h: "object" }],
   "S + aux + adj": [{ g: "pronoun", h: "subject" }, { g: "aux", h: "be-verb" }, { g: "adjective", h: "predicate adjective" }],
+  "S + aux + N": [{ g: "pronoun", h: "subject" }, { g: "aux", h: "be-verb" }, { g: "noun", h: "identity noun" }],
+  "S + aux + adj + N": [{ g: "pronoun", h: "subject" }, { g: "aux", h: "be-verb" }, { g: "adjective", h: "modifier" }, { g: "noun", h: "identity noun" }],
   "S + aux + adv + adj": [{ g: "pronoun", h: "subject" }, { g: "aux", h: "be-verb" }, { g: "adverb", h: "degree adverb" }, { g: "adjective", h: "predicate adjective" }],
   "S + aux + V": [{ g: "pronoun", h: "subject" }, { g: "aux", h: "auxiliary" }, { g: "verb", h: "main verb" }],
   "S + aux + V + O": [{ g: "pronoun", h: "subject" }, { g: "aux", h: "auxiliary" }, { g: "verb", h: "main verb" }, { g: "noun", h: "object" }],
@@ -21,6 +23,7 @@ export const SKELETONS = {
   "it + aux + adj + to + V": [{ w: "it" }, { g: "aux", h: "be-verb" }, { g: "adjective", h: "predicate adjective" }, { w: "to" }, { g: "verb", h: "infinitive verb" }],
   "yes/no + S + aux + V": [{ g: "adverb", h: "opener like 'yes' or 'actually'" }, { g: "pronoun", h: "subject" }, { g: "aux", h: "auxiliary" }, { g: "verb", h: "main verb" }],
   "there + aux + O": [{ w: "there" }, { g: "aux", h: "be-verb" }, { g: "noun", h: "thing that exists" }],
+  "S + aux + adj + because + S + V": [{ g: "pronoun", h: "subject" }, { g: "aux", h: "be-verb" }, { g: "adjective", h: "predicate adjective" }, { w: "because" }, { g: "pronoun", h: "subject" }, { g: "verb", h: "main verb" }],
 };
 
 export const SKELETON_CRITERIA = Object.fromEntries(

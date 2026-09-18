@@ -91,19 +91,23 @@ Exposes one tool: `browse(goal, urls?, inputs?, mode?, targetId?, maxTicks?)`.
 ## Bonus: ChatJev
 
 Generation is also just decisions — `chat/` makes Jev "talk" without any
-text generation. Two modes:
+text generation. Three modes:
 
+- **enum** (`--enum`, default in `chat/web.mjs`): the faithful analog of the
+  browser pilot — a dumb grammar mechanically enumerates ~24 complete
+  candidate sentences (the "DOM of language"), Jev picks the best one, and a
+  noul judge verifies it actually answers the question. On failure it
+  resamples a fresh pool. ~2 calls per reply.
 - **naive** (`chatjev.mjs`): every word is one `choice` over a ~500-word
   vocabulary, sampled from Jev's probability distribution. ~1s/word.
-- **structured** (`--struct`, or `chat/web.mjs` for a browser UI): the same
-  observe→decide→verify loop as the browser pilot applied to syntax —
-  **plan** a sentence skeleton → **fill** each slot inside its vocab group →
-  **verify** grammaticality with a noul judge → **repair** the broken slot.
-  Produces real sentences at ~1/4 the token cost:
+- **structured** (`--struct`, `?mode=struct` in the web UI): plan a sentence
+  skeleton → **fill** each slot inside its vocab group → **verify** with a
+  noul judge → **repair** the broken slot.
 
 ```bash
-node chat/chatjev.mjs "what do you think about browser agents?" --struct
-# plan → it + aux + adj → it is good . → verify ✓ 0.94 → It is good.
+node chat/chatjev.mjs "who are you?" --enum
+# grammar enumerated 24 candidates → pick "I am an llm." (p=0.99) → verify ✓ 0.77
+node chat/web.mjs   # → http://localhost:4317
 ```
 
 MIT.

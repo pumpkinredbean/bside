@@ -6,12 +6,12 @@
  * probability distribution is sampled with a temperature, exactly like
  * next-token sampling in an LLM.
  *
- * usage: node chat/chatjev.mjs ["first message"] [--temp 0.9] [--max 40]
+ * usage: node chat/chatjev.mjs ["first message"] [--enum|--struct] [--temp 0.9] [--max 40]
  *        (no message → interactive REPL)
  */
 import { createInterface } from "node:readline";
 import { resolveTypesafeToken } from "../src/pilot.js";
-import { createDecider, sample, render, structuredReply } from "./core.mjs";
+import { createDecider, sample, render, structuredReply, enumerateReply } from "./core.mjs";
 import { VOCAB } from "./vocab.mjs";
 
 const args = process.argv.slice(2);
@@ -23,12 +23,28 @@ const TEMP = flag("--temp", 0.9);
 const MAX_WORDS = flag("--max", 40);
 const REP_PENALTY = flag("--rep", 0.3); // prob multiplier per prior use
 const STRUCT = args.includes("--struct");
-const FLAGS = new Set(["--temp", "--max", "--rep", "--struct"]);
+const ENUM = args.includes("--enum");
+const FLAGS = new Set(["--temp", "--max", "--rep", "--struct", "--enum"]);
 const firstMsg = args.filter((a, i) => !FLAGS.has(a) && !FLAGS.has(args[i - 1])).join(" ");
 
 const d = createDecider(await resolveTypesafeToken());
 
 async function reply(userMsg) {
+  if (ENUM) {
+    const t0 = Date.now();
+    process.stdout.write("\x1b[36mchatjev>\x1b[0m ");
+    const dim = (s) => process.stdout.write("\x1b[2m" + s + "\x1b[0m\n");
+    const r = await enumerateReply(d, userMsg, { onEvent: (e) => {
+      if (e.e === "enum") dim("grammar enumerated " + e.k + " candidates:");
+      else if (e.e === "cands") e.list.slice(0, 5).forEach((c) => dim("  " + (c.p * 100).toFixed(0).padStart(3) + "%  " + c.s));
+      else if (e.e === "pick") process.stdout.write("\x1b[1m" + e.s + "\x1b[0m ");
+      else if (e.e === "verify") dim("verify " + (e.ok >= 0.5 ? "✓" : "✗") + " " + e.ok.toFixed(2));
+      else if (e.e === "resample") dim("↻ resampling fresh pool");
+    } });
+    const dt = (Date.now() - t0) / 1000;
+    process.stdout.write(`\n\x1b[1m→ ${r.text}\x1b[0m\n\x1b[2m${dt.toFixed(1)}s · ${r.inTok.toLocaleString()} in / ${r.outTok.toLocaleString()} out tok · est $${(r.inTok * 0.042 / 1e6).toFixed(4)}\x1b[0m\n`);
+    return r.text;
+  }
   if (STRUCT) {
     const t0 = Date.now();
     process.stdout.write("\x1b[36mchatjev>\x1b[0m ");
