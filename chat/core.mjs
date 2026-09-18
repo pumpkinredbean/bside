@@ -162,7 +162,14 @@ export function enumeratePool(userMsg, K, rng = Math.random) {
       else {
         let list = (GROUPS[slot.g] || "").trim().split(/\s+/);
         if (slot.g === "adjective") list = list.filter((x) => x !== "own");
-        if (hint.includes("identity")) list = [...new Set([...list.filter((x) => !x.endsWith("s") && x !== "people"), "chatbot", "ai", "jev", "llm"])];
+        if (hint.includes("identity")) {
+          const tech = new Set(GROUPS.tech.trim().split(/\s+/));
+          const named = userMsg.toLowerCase().replace(/[^a-z'-]+/g, " ").split(/\s+/)
+            .filter((x) => x.length > 1 && !VOCAB.includes(x) && /^[a-z]+$/.test(x));
+          list = [...new Set([...list.filter((x) => !x.endsWith("s") && x !== "people"),
+            "chatbot", "ai", "jev", "llm",
+            ...echo.filter((e) => tech.has(e)), ...named])];
+        }
         const echoable = CONTENT.has(slot.g) ? echo.filter((e) => list.includes(e)) : [];
         w = echoable.length && rng() < 0.45 ? pick(echoable, rng) : pick(list, rng);
       }
@@ -184,11 +191,13 @@ export function enumeratePool(userMsg, K, rng = Math.random) {
   return [...pool];
 }
 
-export async function enumerateReply(d, userMsg, { K = 24, maxAttempts = 3, onEvent = () => {} } = {}) {
+export async function enumerateReply(d, userMsg, { K = 24, maxAttempts = 3, anon = false, onEvent = () => {} } = {}) {
   let inTok = 0, outTok = 0;
   const bill = (u) => { inTok += u?.input_tokens || 0; outTok += u?.output_tokens || 0; };
   const base = {
-    role: "You are ChatJev. Candidate replies are mechanically enumerated by a grammar — your job is only to decide which one is the best reply.",
+    role: anon
+      ? "Candidate replies are mechanically enumerated by a grammar — decide which one is the best reply to the user message."
+      : "You are ChatJev. Candidate replies are mechanically enumerated by a grammar — your job is only to decide which one is the best reply.",
     user_message: userMsg,
   };
   const failed = new Set();

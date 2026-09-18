@@ -37,8 +37,10 @@ h1{font-size:22px;font-weight:800;letter-spacing:-.5px}.h1 b{color:#7c5cff}
 .cand.hit{color:#9d97ff;border-left-color:#7c5cff}
 .ans{display:block;font-size:17px;font-weight:700;color:#fff;padding:10px 14px;background:#181828;border-left:3px solid #7c5cff;border-radius:6px;margin:10px 0 4px}
 .ans::before{content:"reply →";display:block;font-size:10px;font-weight:400;color:#7c5cff;margin-bottom:3px;letter-spacing:.5px}
-.mode{font-size:11px;color:#555;margin-top:2px}
+.mode{font-size:11px;color:#555;margin-top:2px;display:flex;gap:14px;align-items:center}
 .mode a{color:#7c5cff;text-decoration:none}
+.mode label{cursor:pointer;user-select:none}
+.mode input{accent-color:#7c5cff;vertical-align:-1px}
 .bar{width:min(640px,100%);display:flex;gap:10px}
 input{flex:1;background:#12121c;border:1px solid #232338;border-radius:10px;color:#e8e8f0;font:inherit;padding:12px 14px;outline:none}
 input:focus{border-color:#7c5cff}
@@ -54,9 +56,11 @@ button:disabled{opacity:.4;cursor:default}
 <div class="bar"><input id="inp" placeholder="say something…" autofocus><button id="go">send</button></div>
 <script>
 const MODE = new URLSearchParams(location.search).get("mode") || "enum";
-document.getElementById("mode").innerHTML = MODE === "enum"
+document.getElementById("mode").innerHTML = (MODE === "enum"
   ? 'mode: <b>enum</b> (grammar enumerates, jev picks) · <a href="?mode=struct">struct</a>'
-  : 'mode: <b>struct</b> (plan→fill→verify→repair) · <a href="?">enum</a>';
+  : 'mode: <b>struct</b> (plan→fill→verify→repair) · <a href="?">enum</a>') +
+  (MODE === "enum" ? ' <label><input type="checkbox" id="anon"> no identity hint</label>' : "");
+const ANON = () => document.getElementById("anon")?.checked ? "&anon=1" : "";
 const log = document.getElementById("log"), inp = document.getElementById("inp"), go = document.getElementById("go");
 function add(cls, html) { const m = document.createElement("div"); m.className = "msg " + cls; m.innerHTML = html; log.appendChild(m); m.scrollIntoView({block:"end"}); return m; }
 const esc = (s) => s.replace(/</g,"&lt;");
@@ -67,7 +71,7 @@ async function send() {
   const bot = add("bot", '<span class="cur"></span>');
   const stage = (t) => bot.insertAdjacentHTML("beforeend", '<div class="grp">' + t + "</div>");
   let t0 = Date.now(), cands = null;
-  const es = new EventSource("/api/chat?mode=" + MODE + "&msg=" + encodeURIComponent(msg));
+  const es = new EventSource("/api/chat?mode=" + MODE + ANON() + "&msg=" + encodeURIComponent(msg));
   es.onmessage = (e) => {
     const ev = JSON.parse(e.data);
     const cur = bot.querySelector(".cur");
@@ -133,6 +137,7 @@ const server = createServer(async (req, res) => {
   if (u.pathname === "/api/chat") {
     const msg = (u.searchParams.get("msg") || "").slice(0, 500);
     const mode = u.searchParams.get("mode") || "enum";
+    const anon = u.searchParams.get("anon") === "1";
     res.writeHead(200, {
       "content-type": "text/event-stream",
       "cache-control": "no-cache",
@@ -140,7 +145,7 @@ const server = createServer(async (req, res) => {
     });
     const send = (o) => res.write("data: " + JSON.stringify(o) + "\n\n");
     try {
-      await (mode === "struct" ? structuredReply : enumerateReply)(d, msg, { onEvent: send });
+      await (mode === "struct" ? structuredReply : (dd, mm, o) => enumerateReply(dd, mm, { ...o, anon }))(d, msg, { onEvent: send });
     } catch (e) {
       send({ e: "error", m: e.message.slice(0, 200) });
     }
