@@ -88,4 +88,16 @@ Exposes one tool: `browse(goal, urls?, inputs?, mode?, targetId?, maxTicks?)`.
 - Each run is one `aside repl` call (~120s cap); session tabs close on exit.
   Use `--attach`/`--active` to drive persistent browser tabs.
 
+## Bonus: ChatJev
+
+Generation is also just decisions — `chat/chatjev.mjs` makes Jev "talk" by
+choosing every word from a bounded vocabulary (~500 words), sampled from its
+own probability distribution. ~1s per word, gloriously bad grammar, and a
+decent way to feel what a decision model actually is:
+
+```bash
+node chat/chatjev.mjs "why are you fast?"
+# chatjev> i am fast → I am fast   (3 words · 3.5s · $0.0002)
+```
+
 MIT.
