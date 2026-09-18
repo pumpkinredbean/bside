@@ -32,9 +32,11 @@ h1{font-size:22px;font-weight:800;letter-spacing:-.5px}.h1 b{color:#7c5cff}
 @keyframes fade{to{opacity:1}}
 .meta{font-size:10.5px;color:#555;margin-top:6px}
 .grp{font-size:10.5px;color:#5a5a78;font-style:italic}
-.cand{font-size:11.5px;color:#4a4a66;padding:1px 8px;border-left:2px solid #232338;margin:1px 0;white-space:pre-wrap}
-.cand b{color:#7c5cff;font-weight:400}
+.cand{font-size:11.5px;color:#4a4a66;padding:1px 8px;border-left:2px solid #1c1c2c;margin:1px 0;white-space:pre-wrap}
+.cand b{color:#7c5cff;font-weight:400;opacity:.7}
 .cand.hit{color:#9d97ff;border-left-color:#7c5cff}
+.ans{display:block;font-size:17px;font-weight:700;color:#fff;padding:10px 14px;background:#181828;border-left:3px solid #7c5cff;border-radius:6px;margin:10px 0 4px}
+.ans::before{content:"reply →";display:block;font-size:10px;font-weight:400;color:#7c5cff;margin-bottom:3px;letter-spacing:.5px}
 .mode{font-size:11px;color:#555;margin-top:2px}
 .mode a{color:#7c5cff;text-decoration:none}
 .bar{width:min(640px,100%);display:flex;gap:10px}
@@ -70,7 +72,7 @@ async function send() {
     const ev = JSON.parse(e.data);
     const cur = bot.querySelector(".cur");
     if (ev.e === "enum") {
-      stage("enumerating " + ev.k + " candidate sentences — grammar only, zero intelligence");
+      stage("grammar enumerated " + ev.k + " candidates — jev ranked:");
       cands = document.createElement("div");
       bot.insertBefore(cands, cur);
     } else if (ev.e === "cands") {
@@ -78,9 +80,11 @@ async function send() {
       bot.scrollIntoView({block:"end"});
     } else if (ev.e === "pick") {
       if (cands) { const el = cands.querySelector('[data-s="' + CSS.escape(ev.s) + '"]'); if (el) el.className = "cand hit"; }
-      cur.insertAdjacentHTML("beforebegin", '<span class="w" title="picked · p=' + (ev.p != null ? ev.p.toFixed(2) : "?") + '">' + esc(ev.s) + " </span>");
+      cur.insertAdjacentHTML("beforebegin", '<div class="ans">' + esc(ev.s) + "</div>");
     } else if (ev.e === "resample") {
       if (cands) cands.innerHTML = "";
+      const ans = [...bot.querySelectorAll(".ans")].pop();
+      if (ans) { ans.style.opacity = ".35"; ans.style.textDecoration = "line-through"; }
       stage("verify failed — resampling a fresh candidate pool");
     } else if (ev.e === "plan") {
       stage("plan → '" + esc(ev.name) + "' sentence");
