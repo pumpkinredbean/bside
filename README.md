@@ -4,7 +4,7 @@
 
 Jev is a System One model: it never generates text. Each tick it answers typed
 questions — which action, which element, is the goal met — with calibrated
-probabilities and confidence, in ~300–900ms at ~$0.042/1M input tokens.
+probabilities and confidence, in ~0.3–1s at ~$0.042/1M input tokens.
 Actions come from a schema you enumerate, so the pilot cannot hallucinate a
 tool call.
 
@@ -20,10 +20,10 @@ site, search for Batman on Wikipedia, then in the Batman article click the
 link to the Gotham City article" — same browser, same loop, only the
 decision engine differs:
 
-| engine | wall time | steps | per-decision latency | est. cost |
+| engine | wall time | steps | avg decision latency | est. cost |
 | --- | --- | --- | --- | --- |
 | **jev** (bside) | **52.8s** | 7 | ~1.0s | $0.0018 |
-| gpt-6-astra (frontier LLM) | 72.9s | 7 | ~3–6s | $0.039 |
+| gpt-6-astra (frontier LLM) | 72.9s | 7 | ~3.6s | $0.039 |
 | gpt-5.6-luna (light LLM) | 68.9s | 7+retries | ~2.5s | $0.011 |
 
 Browser latency (page loads, snapshots, action execution) is excluded from
@@ -31,7 +31,8 @@ the decision column — those numbers measure only model inference. Luna
 additionally attempted clicks on elements that do not exist and retried;
 Jev cannot emit a ref outside the enumerated candidate set.
 
-Reproduce:
+Reproduce (model names shown are the ones measured; any
+Responses-compatible model works — results will differ):
 
 ```bash
 export BSIDE_LLM_URL=https://api.openai.com/v1/responses   # or any Responses-compatible endpoint

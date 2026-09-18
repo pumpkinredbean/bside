@@ -60,7 +60,7 @@ body{background:#0a0a10;color:#e8e8f0;font:15px/1.4 ui-monospace,"SF Mono",Menlo
 </style>
 <div class="hdr"><div class="logo"><b>bside</b> race</div><div class="sub">same task · same browser · real-time replay · captured @700ms intervals</div></div>
 <div class="task">${task.goal.replace(/</g, "&lt;")}</div>
-<div class="sub">no chat LLM on the left — one typed decision per step. frontier &amp; lightweight GPT on the right.</div>
+<div class="sub">one typed decision per step vs LLM text-gen loops — real timestamps, ordered by finish time.</div>
 <div class="grid">
 ${results.map((r) => `<div class="col" data-col="${r.name}">
   <div class="top"><div class="badge" style="color:${colors[r.name] || "#ccc"}">${r.name}<span class="kind">${r.name === "jev" ? "decision model · no text gen" : "llm text-gen loop"}</span></div><div class="clock" data-clock="${r.name}">0.0s</div></div>
