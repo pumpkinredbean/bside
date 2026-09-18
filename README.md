@@ -29,7 +29,11 @@ decision engine differs:
 Browser latency (page loads, snapshots, action execution) is excluded from
 the decision column — those numbers measure only model inference. Luna
 additionally attempted clicks on elements that do not exist and retried;
-Jev cannot emit a ref outside the enumerated candidate set.
+Jev cannot emit a ref outside the enumerated candidate set. In the event
+log (`bench/example-results.json`) these show up as `act_start`/`act_end`
+pairs completing in ~16 ms (vs ~0.7–1.8 s for real clicks) and as extra
+`call` cycles without a matching `act` — the failure signature of a
+generated ref that isn't on the page.
 
 Reproduce (model names shown are the ones measured; any
 Responses-compatible model works — results will differ):

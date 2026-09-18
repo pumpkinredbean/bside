@@ -133,10 +133,12 @@ var repeats = {};
 var visited = {};
 var fails = 0;
 var lowConf = 0;
+var lastTree = "";
 for (var tick = 0; tick < TASK.maxTicks; tick++) {
   __ev({ e: "snap_start" });
   var __st0 = Date.now();
   var s = await snapshot(page, { interactive: true });
+  lastTree = s.tree;
   __ev({ e: "snap_end", ms: Date.now() - __st0 });
   var el = els(s.tree);
   visited[page.url().replace(/\/+$/, "")] = 1;
@@ -329,7 +331,7 @@ for (var fi = 0; fi < __frames.length; fi++) {
   console.log("__FRAME__" + __frames[fi][0] + "__" + __frames[fi][1]);
 }
 if (TASK.lingerMs) { console.log("lingering " + TASK.lingerMs + "ms so you can see the tab"); await sleep(TASK.lingerMs); }
-console.log("__OUT__" + JSON.stringify({ ticks: history.length, history: history, url: page.url(), title: await page.title(), elapsedMs: Date.now() - __t0 }));
+console.log("__OUT__" + JSON.stringify({ ticks: history.length, history: history, url: page.url(), title: await page.title(), elapsedMs: Date.now() - __t0, tree: TASK.dumpTree ? lastTree : undefined }));
 `;
 }
 

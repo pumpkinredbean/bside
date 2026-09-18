@@ -1,0 +1,706 @@
+{
+  "task": {
+    "goal": "Starting from google.com, search for wikipedia, open the English Wikipedia site, search for Batman on Wikipedia, then in the Batman article click the link to the Gotham City article",
+    "urls": [
+      "https://www.google.com/?hl=en&gl=us"
+    ],
+    "inputs": [
+      "wikipedia",
+      "batman"
+    ],
+    "doneEval": "decodeURIComponent(location.href).includes(\"Gotham_City\") || decodeURIComponent(location.href).includes(\"고담시\")",
+    "maxTicks": 14,
+    "shots": true,
+    "mode": "new_tab"
+  },
+  "at": "2026-09-18T04:38:35.572Z",
+  "results": [
+    {
+      "name": "jev",
+      "wall": 52781,
+      "ticks": 7,
+      "url": "https://en.wikipedia.org/wiki/Gotham_City",
+      "title": "Gotham City - Wikipedia",
+      "frames": 66,
+      "ok": true,
+      "elapsedMs": 51920,
+      "decAvg": 1022,
+      "evs": [
+        {
+          "t": 5210,
+          "e": "tab_ready"
+        },
+        {
+          "t": 5210,
+          "e": "snap_start"
+        },
+        {
+          "t": 5246,
+          "e": "snap_end",
+          "ms": 35
+        },
+        {
+          "t": 5249,
+          "e": "call_start"
+        },
+        {
+          "t": 6232,
+          "e": "call_end",
+          "ms": 983,
+          "in": 941,
+          "out": 173
+        },
+        {
+          "t": 6232,
+          "e": "act_start"
+        },
+        {
+          "t": 8267,
+          "e": "act_end"
+        },
+        {
+          "t": 13681,
+          "e": "snap_start"
+        },
+        {
+          "t": 13706,
+          "e": "snap_end",
+          "ms": 25
+        },
+        {
+          "t": 13709,
+          "e": "call_start"
+        },
+        {
+          "t": 14597,
+          "e": "call_end",
+          "ms": 888,
+          "in": 2072,
+          "out": 326
+        },
+        {
+          "t": 14598,
+          "e": "act_start"
+        },
+        {
+          "t": 14624,
+          "e": "act_end"
+        },
+        {
+          "t": 20050,
+          "e": "snap_start"
+        },
+        {
+          "t": 20071,
+          "e": "snap_end",
+          "ms": 21
+        },
+        {
+          "t": 20073,
+          "e": "call_start"
+        },
+        {
+          "t": 21186,
+          "e": "call_end",
+          "ms": 1113,
+          "in": 2777,
+          "out": 428
+        },
+        {
+          "t": 21186,
+          "e": "act_start"
+        },
+        {
+          "t": 21199,
+          "e": "act_end"
+        },
+        {
+          "t": 26613,
+          "e": "snap_start"
+        },
+        {
+          "t": 26711,
+          "e": "snap_end",
+          "ms": 98
+        },
+        {
+          "t": 26713,
+          "e": "call_start"
+        },
+        {
+          "t": 27676,
+          "e": "call_end",
+          "ms": 963,
+          "in": 8049,
+          "out": 849
+        },
+        {
+          "t": 27677,
+          "e": "act_start"
+        },
+        {
+          "t": 29536,
+          "e": "act_end"
+        },
+        {
+          "t": 34964,
+          "e": "snap_start"
+        },
+        {
+          "t": 35064,
+          "e": "snap_end",
+          "ms": 100
+        },
+        {
+          "t": 35115,
+          "e": "call_start"
+        },
+        {
+          "t": 36262,
+          "e": "call_end",
+          "ms": 1147,
+          "in": 9221,
+          "out": 847
+        },
+        {
+          "t": 36262,
+          "e": "act_start"
+        },
+        {
+          "t": 36286,
+          "e": "act_end"
+        },
+        {
+          "t": 41721,
+          "e": "snap_start"
+        },
+        {
+          "t": 41826,
+          "e": "snap_end",
+          "ms": 105
+        },
+        {
+          "t": 41828,
+          "e": "call_start"
+        },
+        {
+          "t": 42874,
+          "e": "call_end",
+          "ms": 1046,
+          "in": 9156,
+          "out": 877
+        },
+        {
+          "t": 42874,
+          "e": "act_start"
+        },
+        {
+          "t": 42895,
+          "e": "act_end"
+        },
+        {
+          "t": 48328,
+          "e": "snap_start"
+        },
+        {
+          "t": 48690,
+          "e": "snap_end",
+          "ms": 361
+        },
+        {
+          "t": 48714,
+          "e": "call_start"
+        },
+        {
+          "t": 49727,
+          "e": "call_end",
+          "ms": 1013,
+          "in": 8743,
+          "out": 848
+        },
+        {
+          "t": 49727,
+          "e": "act_start"
+        },
+        {
+          "t": 50665,
+          "e": "act_end"
+        }
+      ]
+    },
+    {
+      "name": "gpt-6-astra",
+      "wall": 72919,
+      "ticks": 7,
+      "url": "https://en.wikipedia.org/wiki/Gotham_City",
+      "title": "Gotham City - Wikipedia",
+      "frames": 95,
+      "ok": true,
+      "elapsedMs": 72301,
+      "decAvg": 3624,
+      "evs": [
+        {
+          "t": 5424,
+          "e": "tab_ready"
+        },
+        {
+          "t": 5424,
+          "e": "snap_start"
+        },
+        {
+          "t": 5430,
+          "e": "snap_end",
+          "ms": 6
+        },
+        {
+          "t": 5432,
+          "e": "call_start"
+        },
+        {
+          "t": 11311,
+          "e": "call_end",
+          "ms": 5879,
+          "in": 286,
+          "out": 44
+        },
+        {
+          "t": 11311,
+          "e": "act_start"
+        },
+        {
+          "t": 12746,
+          "e": "act_end"
+        },
+        {
+          "t": 18167,
+          "e": "snap_start"
+        },
+        {
+          "t": 18196,
+          "e": "snap_end",
+          "ms": 29
+        },
+        {
+          "t": 18203,
+          "e": "call_start"
+        },
+        {
+          "t": 21840,
+          "e": "call_end",
+          "ms": 3637,
+          "in": 941,
+          "out": 37
+        },
+        {
+          "t": 21841,
+          "e": "act_start"
+        },
+        {
+          "t": 21857,
+          "e": "act_end"
+        },
+        {
+          "t": 27301,
+          "e": "snap_start"
+        },
+        {
+          "t": 27330,
+          "e": "snap_end",
+          "ms": 29
+        },
+        {
+          "t": 27332,
+          "e": "call_start"
+        },
+        {
+          "t": 29759,
+          "e": "call_end",
+          "ms": 2427,
+          "in": 1301,
+          "out": 34
+        },
+        {
+          "t": 29759,
+          "e": "act_start"
+        },
+        {
+          "t": 31275,
+          "e": "act_end"
+        },
+        {
+          "t": 36696,
+          "e": "snap_start"
+        },
+        {
+          "t": 36795,
+          "e": "snap_end",
+          "ms": 98
+        },
+        {
+          "t": 36796,
+          "e": "call_start"
+        },
+        {
+          "t": 40087,
+          "e": "call_end",
+          "ms": 3291,
+          "in": 5132,
+          "out": 34
+        },
+        {
+          "t": 40087,
+          "e": "act_start"
+        },
+        {
+          "t": 41601,
+          "e": "act_end"
+        },
+        {
+          "t": 47052,
+          "e": "snap_start"
+        },
+        {
+          "t": 47155,
+          "e": "snap_end",
+          "ms": 103
+        },
+        {
+          "t": 47204,
+          "e": "call_start"
+        },
+        {
+          "t": 50939,
+          "e": "call_end",
+          "ms": 3735,
+          "in": 6542,
+          "out": 37
+        },
+        {
+          "t": 50939,
+          "e": "act_start"
+        },
+        {
+          "t": 50965,
+          "e": "act_end"
+        },
+        {
+          "t": 56396,
+          "e": "snap_start"
+        },
+        {
+          "t": 56501,
+          "e": "snap_end",
+          "ms": 105
+        },
+        {
+          "t": 56504,
+          "e": "call_start"
+        },
+        {
+          "t": 59678,
+          "e": "call_end",
+          "ms": 3174,
+          "in": 6283,
+          "out": 34
+        },
+        {
+          "t": 59678,
+          "e": "act_start"
+        },
+        {
+          "t": 61080,
+          "e": "act_end"
+        },
+        {
+          "t": 66503,
+          "e": "snap_start"
+        },
+        {
+          "t": 66859,
+          "e": "snap_end",
+          "ms": 355
+        },
+        {
+          "t": 66882,
+          "e": "call_start"
+        },
+        {
+          "t": 70109,
+          "e": "call_end",
+          "ms": 3227,
+          "in": 6073,
+          "out": 34
+        },
+        {
+          "t": 70110,
+          "e": "act_start"
+        },
+        {
+          "t": 71012,
+          "e": "act_end"
+        }
+      ],
+      "price": {
+        "i": 1.25,
+        "o": 10
+      }
+    },
+    {
+      "name": "gpt-5.6-luna",
+      "wall": 68904,
+      "ticks": 7,
+      "url": "https://en.wikipedia.org/wiki/Gotham_City",
+      "title": "Gotham City - Wikipedia",
+      "frames": 90,
+      "ok": true,
+      "elapsedMs": 68195,
+      "decAvg": 2530,
+      "evs": [
+        {
+          "t": 5217,
+          "e": "tab_ready"
+        },
+        {
+          "t": 5217,
+          "e": "snap_start"
+        },
+        {
+          "t": 5226,
+          "e": "snap_end",
+          "ms": 9
+        },
+        {
+          "t": 5228,
+          "e": "call_start"
+        },
+        {
+          "t": 7809,
+          "e": "call_end",
+          "ms": 2581,
+          "in": 286,
+          "out": 53
+        },
+        {
+          "t": 7809,
+          "e": "act_start"
+        },
+        {
+          "t": 9211,
+          "e": "act_end"
+        },
+        {
+          "t": 14634,
+          "e": "snap_start"
+        },
+        {
+          "t": 14667,
+          "e": "snap_end",
+          "ms": 33
+        },
+        {
+          "t": 14669,
+          "e": "call_start"
+        },
+        {
+          "t": 16909,
+          "e": "call_end",
+          "ms": 2240,
+          "in": 941,
+          "out": 46
+        },
+        {
+          "t": 16909,
+          "e": "act_start"
+        },
+        {
+          "t": 16925,
+          "e": "act_end"
+        },
+        {
+          "t": 22339,
+          "e": "snap_start"
+        },
+        {
+          "t": 22357,
+          "e": "snap_end",
+          "ms": 18
+        },
+        {
+          "t": 22359,
+          "e": "call_start"
+        },
+        {
+          "t": 24819,
+          "e": "call_end",
+          "ms": 2460,
+          "in": 1301,
+          "out": 43
+        },
+        {
+          "t": 24819,
+          "e": "act_start"
+        },
+        {
+          "t": 24831,
+          "e": "act_end"
+        },
+        {
+          "t": 30264,
+          "e": "snap_start"
+        },
+        {
+          "t": 30350,
+          "e": "snap_end",
+          "ms": 86
+        },
+        {
+          "t": 30352,
+          "e": "call_start"
+        },
+        {
+          "t": 33401,
+          "e": "call_end",
+          "ms": 3049,
+          "in": 5159,
+          "out": 68
+        },
+        {
+          "t": 33401,
+          "e": "act_start"
+        },
+        {
+          "t": 34356,
+          "e": "act_end"
+        },
+        {
+          "t": 39783,
+          "e": "snap_start"
+        },
+        {
+          "t": 39884,
+          "e": "snap_end",
+          "ms": 101
+        },
+        {
+          "t": 39887,
+          "e": "call_start"
+        },
+        {
+          "t": 42826,
+          "e": "call_end",
+          "ms": 2939,
+          "in": 6565,
+          "out": 62
+        },
+        {
+          "t": 42827,
+          "e": "act_start"
+        },
+        {
+          "t": 42843,
+          "e": "act_end"
+        },
+        {
+          "t": 48266,
+          "e": "snap_start"
+        },
+        {
+          "t": 48376,
+          "e": "snap_end",
+          "ms": 109
+        },
+        {
+          "t": 48425,
+          "e": "call_start"
+        },
+        {
+          "t": 50937,
+          "e": "call_end",
+          "ms": 2512,
+          "in": 6300,
+          "out": 45
+        },
+        {
+          "t": 50937,
+          "e": "act_start"
+        },
+        {
+          "t": 52728,
+          "e": "act_end"
+        },
+        {
+          "t": 58193,
+          "e": "snap_start"
+        },
+        {
+          "t": 58559,
+          "e": "snap_end",
+          "ms": 366
+        },
+        {
+          "t": 58562,
+          "e": "call_start"
+        },
+        {
+          "t": 61713,
+          "e": "call_end",
+          "ms": 3151,
+          "in": 6090,
+          "out": 99
+        },
+        {
+          "t": 61713,
+          "e": "snap_start"
+        },
+        {
+          "t": 62052,
+          "e": "snap_end",
+          "ms": 339
+        },
+        {
+          "t": 62054,
+          "e": "call_start"
+        },
+        {
+          "t": 64152,
+          "e": "call_end",
+          "ms": 2098,
+          "in": 6090,
+          "out": 96
+        },
+        {
+          "t": 64153,
+          "e": "snap_start"
+        },
+        {
+          "t": 64467,
+          "e": "snap_end",
+          "ms": 314
+        },
+        {
+          "t": 64470,
+          "e": "call_start"
+        },
+        {
+          "t": 66207,
+          "e": "call_end",
+          "ms": 1737,
+          "in": 6090,
+          "out": 61
+        },
+        {
+          "t": 66207,
+          "e": "act_start"
+        },
+        {
+          "t": 66925,
+          "e": "act_end"
+        }
+      ],
+      "price": {
+        "i": 0.25,
+        "o": 2
+      }
+    }
+  ]
+}
